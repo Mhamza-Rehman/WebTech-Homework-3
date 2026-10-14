@@ -1,0 +1,49 @@
+@model IEnumerable<AttendanceSystem.Models.Student>
+@{
+    ViewData["Title"] = "Students";
+}
+
+<h2>Registered Students</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+<a asp-action="Create" class="btn btn-primary mb-3">Add New Student</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Registration No.</th>
+            <th>Department</th>
+            <th>Attendance %</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    @if (!Model.Any())
+    {
+        <tr><td colspan="6" class="text-center">No students registered yet.</td></tr>
+    }
+    @foreach (var s in Model)
+    {
+        <tr>
+            <td>@s.StudentId</td>
+            <td>@s.StudentName</td>
+            <td>@s.RegistrationNumber</td>
+            <td>@s.Department</td>
+            <td>@s.AttendancePercentage.ToString("0.00")</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@s.StudentId" class="btn btn-sm btn-warning">Edit</a>
+                <form asp-action="Delete" asp-route-id="@s.StudentId" method="post" class="d-inline"
+                      onsubmit="return confirm('Delete this student?');">
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

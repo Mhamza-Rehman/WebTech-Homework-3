@@ -1,0 +1,39 @@
+@model AttendanceSystem.Models.Student
+@{
+    ViewData["Title"] = "Edit Student";
+}
+
+<h2>Edit Student</h2>
+
+<form asp-action="Edit" asp-route-id="@Model.StudentId" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="StudentId" />
+
+    <div class="mb-3">
+        <label asp-for="StudentName" class="form-label"></label>
+        <input asp-for="StudentName" class="form-control" />
+        <span asp-validation-for="StudentName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="RegistrationNumber" class="form-label"></label>
+        <input asp-for="RegistrationNumber" class="form-control" />
+        <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Department" class="form-label"></label>
+        <input asp-for="Department" class="form-control" />
+        <span asp-validation-for="Department" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="AttendancePercentage" class="form-label"></label>
+        <input asp-for="AttendancePercentage" class="form-control" />
+        <span asp-validation-for="AttendancePercentage" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Update</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
